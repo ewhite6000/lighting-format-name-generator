@@ -4,6 +4,7 @@
         <h2>Lighting Profile Format Name Generator</h2>
         <p id='fullName'> Global Data Format Type</p>
         <p id='abbreviation'>GDFT</p>
+        <p>Number of words: <input id="words" type="number" min="3" max="10" value="3"/></p>
         <button id='button'>Generate!</button>
 
         <script type="text/javascript" src="names.js"></script>
@@ -14,9 +15,13 @@
 
         button.onclick = function() {
             var startName = startNames[(Math.random() * startNames.length) | 0];
-            var middleName = middleNames[(Math.random() * middleNames.length) | 0];
+            var numberOfNames = parseInt(document.getElementById("words").value, 10) - 2;
+            var middleNameList = ""
+            for (i = 0; i < numberOfNames; i++) {
+                middleNameList += middleNames[(Math.random() * middleNames.length) | 0] + " ";
+            }
             var endName = endNames[(Math.random() * endNames.length) | 0];
-            var fullString = startName + ' ' + middleName + ' ' + endName;
+            var fullString = startName + ' ' + middleNameList + ' ' + endName;
             fullNameElement.innerHTML = fullString;
 
             var matches = fullString.match(/\b(\w)/g);
